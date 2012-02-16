@@ -1,7 +1,7 @@
 jQuery appSettings
 ==================
 
-Use to easily manage persistent settings for a desktop or mobile web application.
+Easily manage persistent settings for a desktop or mobile web application.
 
 
 Configure like this:
