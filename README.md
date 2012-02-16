@@ -1,12 +1,10 @@
-jQuery appSettings
-==================
+#jQuery appSettings
 
-Easily manage persistent settings for a desktop or mobile web application.
+##Easily manage persistent settings for a desktop or mobile web application.
 
 ###Demo: [knotbird.com/appSettings](http://knotbird.com/appSettings)
 
-Configure like this:
---------------------
+##Configure like this:
 ``` javascript
 config = {
     // On/Off Toggle
@@ -33,8 +31,7 @@ config = {
 ```
         
 
-Initialize like this:
----------------------
+##Initialize like this:
 
 ``` javascript
 $.appSettings.initialize({
@@ -54,8 +51,7 @@ $.appSettings.initialize({
 });
 ```
 
-Get an API on your settings like this:
---------------------------------------
+##Get an API on your settings like this:
 
 ``` javascript
 // Get settings
@@ -74,8 +70,7 @@ $.appSettings.add('choose_many', 'option_e')
 $.appSettings.remove('choose_many', 'option_e')
 ```
 
-Best of all, get a UI for managing these settings:
---------------------------------------------------
+##Best of all, get a UI for managing these settings:
 
 ``` javascript
 // HTML Form, which will control the settings object.
