@@ -1,16 +1,17 @@
+
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
-    <script src="/lib/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
-    <script src="/lib/jstorage/jstorage.min.js"></script>
-    <script src="/jquery.appsettings.js"></script>
+    <script src="/appSettings/lib/jstorage.min.js"></script>
+    <script src="/appSettings/lib/jquery.appsettings.js"></script>
     <script>
       $(document).ready(function(){
         config = {
             // On/Off Toggle
-            ready: {
+            stereo: {
                 type:   'toggle'
               , selected: true
             }
@@ -55,7 +56,7 @@
   <body>
     <div data-role="page">
       <div data-role="header">
-        <h1>My Groceries Settings</h1>
+        <h1>My Application Settings</h1>
       </div>
     
       <div data-role="content">  

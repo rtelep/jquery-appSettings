@@ -8,7 +8,7 @@
 ``` javascript
 config = {
     // On/Off Toggle
-    ready: {
+    stereo: {
         type:   'toggle'
       , selected: true
     }
