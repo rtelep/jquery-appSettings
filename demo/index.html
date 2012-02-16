@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+    <script src="/lib/jquery.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+    <script src="/lib/jstorage/jstorage.min.js"></script>
+    <script src="/jquery.appsettings.js"></script>
+    <script>
+      $(document).ready(function(){
+        config = {
+            // On/Off Toggle
+            ready: {
+                type:   'toggle'
+              , selected: true
+            }
+      
+            // Choose One, show with Radio Buttons
+          , 'paper_or_plastic':   {
+                type: 'choose_one'
+              , selections: ['paper','plastic','other']
+              , selected: 'paper'
+            }
+            
+            // Choose Many, show with Checkbox
+          , 'groceries':  {
+                type: 'choose_many'
+              , selections: ['eggs', 'waffles', 'beer', 'broccoli']
+              , selected: ['beer', 'broccoli']
+            } 
+    
+        };
+      
+        $.appSettings.initialize({
+            // The jStorage key
+            _id:  'APP_SETTINGS_DEMO'
+
+            // The settings for your application
+          , config: config
+
+          , options: {
+
+              //  jQuery Mobile form, using flip switch for toggle
+              //  http://jquerymobile.com/test/docs/forms/docs-forms.html
+              mobile: true  
+            }
+
+        });
+        
+        $.appSettings.getForm().appendTo('#example_form').trigger('create');
+
+      });      
+    </script>
+  </head>
+  <body>
+    <div data-role="page">
+      <div data-role="header">
+        <h1>My Groceries Settings</h1>
+      </div>
+    
+      <div data-role="content">  
+        <div id="example_form"></div>    
+      </div>
+    </div>
+  </body>
+</html>
