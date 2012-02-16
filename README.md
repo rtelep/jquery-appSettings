@@ -1,7 +1,7 @@
 jQuery appSettings
 ==================
 
-Use [jStorage](http://www.jstorage.info/) to easily manage persistent settings for a desktop or mobile web application.
+Use to easily manage persistent settings for a desktop or mobile web application.
 
 
 Configure like this:
@@ -83,3 +83,5 @@ $.appSettings.getForm().appendTo('BODY');
 ```
 
 
+
+Uses [jStorage](http://www.jstorage.info/).
