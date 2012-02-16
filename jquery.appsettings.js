@@ -335,8 +335,8 @@ var _app_Settings = function(_options){
 
 
 
-// jQuery API
-// ----------
+// jQuery-ish API
+// --------------
 $.appSettings = {};
 $.appSettings.initialize = function(options){
     $.appSettings._app_settings = new _app_Settings(options);
@@ -359,6 +359,8 @@ $.appSettings.revert = function(options){
 $.appSettings.getForm = function(){
     return $.appSettings._app_settings.getForm();
 }
+
+
 
 
 // Array Remove - By John Resig (MIT Licensed)
