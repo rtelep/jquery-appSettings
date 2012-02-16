@@ -3,6 +3,7 @@ jQuery appSettings
 
 Easily manage persistent settings for a desktop or mobile web application.
 
+#Demo: [knotbird.com/appSettings](http://knotbird.com/appSettings)
 
 Configure like this:
 --------------------
