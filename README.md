@@ -6,7 +6,7 @@ Use [jStorage](http://www.jstorage.info/) to easily manage persistent settings f
 
 Configure like this:
 --------------------
-        ```javascript
+        ``` javascript
         config = {
             // On/Off Toggle
             ready: {
@@ -35,7 +35,7 @@ Configure like this:
 Initialize like this:
 ---------------------
 
-        ```javascript
+        ``` javascript
         $.appSettings.initialize({
             // The jStorage key
             _id:  'APP_SETTINGS_DEMO'
@@ -56,7 +56,7 @@ Initialize like this:
 Get an API on your settings like this:
 --------------------------------------
 
-    ```javascript
+    ``` javascript
     // Get settings
     // ----------------
     $.appSettings.get('toggle_me')      // true
@@ -76,7 +76,7 @@ Get an API on your settings like this:
 Best of all, get a UI for managing these settings:
 --------------------------------------------------
 
-    ```javascript
+    ``` javascript
     // HTML Form, which will control the settings object.
     // --------------------------------------------------
     $.appSettings.getForm().appendTo('BODY');
