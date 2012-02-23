@@ -88,4 +88,4 @@ $.appSettings.getForm().appendTo('BODY');
 
 
 
-Uses [jStorage](http://www.jstorage.info/).
+###appSettings uses [jStorage](http://www.jstorage.info/), and [jQuery Mobile](jquerymobile.com).
