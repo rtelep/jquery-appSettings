@@ -51,7 +51,8 @@
  *          _id:    'EXAMPLE_APP_SETTINGS'
  *      ,   config: config
  *      ,   options:    {
- *              mobile: true
+ *                  mobile: true
+ *              ,   mini: true
  *          }
  *  });
  *
@@ -61,6 +62,10 @@
  *  $.appSettings.get('choose_one'))    // 'option_b'
  *  $.appSettings.get('choose_many')    // ['option_d', 'option_f']
  *
+ *  // Reset the settings
+ *  // ------------------
+ *  $.appSettings.reset();
+ *  
  *  // Make changes to settings, which persist across page loads.
  *  // ----------------------------------------------------------
  *
@@ -82,6 +87,7 @@
 var _app_Settings = function(_options){
     
     var App = this;
+    if (! $.jStorage) throw('appSettings requires jStorage')
     if (! _options) throw('Supply an options hash');
     if (! _options._id) throw('Supply an _id key in options');
     
@@ -98,7 +104,7 @@ var _app_Settings = function(_options){
         // Try to look up persistent object
         App.d = $.jStorage.get(App._id);
         if (! App.d){
-            // Doesn't exists, revert to a copy of default object
+            // Doesn't exists, reset to a copy of default object
             App.d = $.extend({}, App.user_config.config);
             // Save it.
             $.jStorage.set(App._id, App.d);
@@ -112,6 +118,7 @@ var _app_Settings = function(_options){
     };
     
     App.set = function(key, value){
+        if (App.d[key] == undefined) throw(key + ' is not a key in settings for this application.')
         if (App.d[key].type == 'choose_many') throw('Use add(), and remove() for Choose Many types');
         App.d[key].selected = value;
         $.jStorage.set(App._id, App.d);
@@ -133,7 +140,7 @@ var _app_Settings = function(_options){
         $.jStorage.set(App._id, App.d);
     }
 
-    App.revert = function(){
+    App.reset = function(){
         $.jStorage.deleteKey(App._id);
         App._init();
     };
@@ -339,9 +346,16 @@ var _app_Settings = function(_options){
         });
 
         if (App.user_config.options.mobile){
+            
             // http://jquerymobile.com/test/docs/forms/docs-forms.html
-            form.find('.'+input_wrapper_class).attr('data-role', 'fieldcontain')
-        };
+            form.find('.'+input_wrapper_class).attr('data-role', 'fieldcontain');
+        
+            // http://jquerymobile.com/test/docs/forms/forms-all-mini.html
+            if (App.user_config.options.mini){    
+                form.find('INPUT').attr('data-mini', 'true');
+                form.find('SELECT').attr('data-mini', 'true');
+            }
+        }
                     
         return form;
         
@@ -375,8 +389,8 @@ $.appSettings.add = function(key, value){
 $.appSettings.remove = function(key, value){
     return $.appSettings._app_settings.remove(key, value);
 };
-$.appSettings.revert = function(options){
-    return $.appSettings._app_settings.revert(options);
+$.appSettings.reset = function(){
+    return $.appSettings._app_settings.reset();
 };
 $.appSettings.getForm = function(){
     return $.appSettings._app_settings.getForm();

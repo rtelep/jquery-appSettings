@@ -43,9 +43,13 @@ $.appSettings.initialize({
 
   , options: {
 
-      //  jQuery Mobile form, using flip switch for toggle
-      //  http://jquerymobile.com/test/docs/forms/docs-forms.html
-      mobile: true  
+            //  jQuery Mobile form, using flip switch for toggle
+            //  http://jquerymobile.com/test/docs/forms/docs-forms.html
+            mobile: true  
+    
+            // Use the mini form elements
+            // http://jquerymobile.com/test/docs/forms/forms-all-mini.html
+        ,   mini: true
     }
 
 });
@@ -59,6 +63,10 @@ $.appSettings.initialize({
 $.appSettings.get('toggle_me')      // true
 $.appSettings.get('choose_one'))    // 'option_b'
 $.appSettings.get('choose_many')    // ['option_d', 'option_f']
+
+// Reset the settings
+// ------------------
+$.appSettings.reset();
 
 // Make changes to settings, which persist across page loads.
 // ----------------------------------------------------------
