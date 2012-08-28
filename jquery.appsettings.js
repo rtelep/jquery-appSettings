@@ -278,7 +278,6 @@ var _app_Settings = function(_options){
 
                     var label = $('<label />')
                         .attr('for', selector_prefix + key)
-                        .html(key.split('_').join(' ').capitalize())
                         .appendTo(input_wrapper);
 
                     var select = $('<select />')

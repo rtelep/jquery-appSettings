@@ -6,7 +6,8 @@
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
     <script src="https://raw.github.com/rtelep/jquery-appSettings/master/lib/jstorage/jstorage.min.js"></script>
-    <script src="https://raw.github.com/rtelep/jquery-appSettings/master/jquery.appsettings.js"></script>
+    <script src="/jquery.appsettings.js"></script>
+    <!--script src="https://raw.github.com/rtelep/jquery-appSettings/master/jquery.appsettings.js"></script-->
     <script>
       $(document).ready(function(){
         config = {
@@ -17,7 +18,7 @@
             }
       
             // Choose One, show with Radio Buttons
-          , 'paper_or_plastic':   {
+          , paper_or_plastic:   {
                 type: 'choose_one'
               , selections: ['paper','plastic','other']
               , selected: 'paper'
@@ -25,14 +26,14 @@
 
               // Choose One, show with Select Element
           ,   choose_one_using_select:     {
-                  type: 'foo'
+                  type: 'choose_one'
                 , selections: ['1', '2', '3', '4', '5']
                 , selected: '4'
                 , form_element: 'select' // default is 'radio'
             }
             
             // Choose Many, show with Checkbox
-          , 'groceries':  {
+          ,   groceries:  {
                 type: 'choose_many'
               , selections: ['eggs', 'waffles', 'beer', 'broccoli']
               , selected: ['beer', 'broccoli']
@@ -69,7 +70,7 @@
   <body>
     <div data-role="page">
       <div data-role="header">
-        <h1>My Application Settings</h1>
+        <h1>jQuery appSettings, Persistent Client-Side Settings</h1>
       </div>
     
       <div data-role="content">  
