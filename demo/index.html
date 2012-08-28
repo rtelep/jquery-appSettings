@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
-    <script src="/appSettings/lib/jstorage.min.js"></script>
-    <script src="/appSettings/lib/jquery.appsettings.js"></script>
+    <script src="https://raw.github.com/rtelep/jquery-appSettings/master/lib/jstorage/jstorage.min.js"></script>
+    <script src="https://raw.github.com/rtelep/jquery-appSettings/master/jquery.appsettings.js"></script>
     <script>
       $(document).ready(function(){
         config = {
@@ -21,6 +21,14 @@
                 type: 'choose_one'
               , selections: ['paper','plastic','other']
               , selected: 'paper'
+            }
+
+              // Choose One, show with Select Element
+          ,   choose_one_using_select:     {
+                  type: 'foo'
+                , selections: ['1', '2', '3', '4', '5']
+                , selected: '4'
+                , form_element: 'select' // default is 'radio'
             }
             
             // Choose Many, show with Checkbox

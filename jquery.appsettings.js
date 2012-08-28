@@ -37,6 +37,14 @@
  *              ,   selections: ['option_a', 'option_b', 'option_c']
  *              ,   selected: 'option_b'
  *          }
+ *
+ *          // Choose One, show with Select Element
+ *      ,   choose_one_using_select:     {
+ *                  type: 'choose_one'
+ *              ,   selections: ['option_a', 'option_b', 'option_c']
+ *              ,   selected: 'option_b'
+ *              ,   form_element: 'select' // default is 'radio'
+ *          }
  *          
  *          // Choose Many, show with Checkbox
  *      ,   choose_many:    {
@@ -53,6 +61,7 @@
  *      ,   options:    {
  *                  mobile: true
  *              ,   mini: true
+ *              ,   onReady: function(){}
  *          }
  *  });
  *
@@ -87,7 +96,7 @@
 var _app_Settings = function(_options){
     
     var App = this;
-    if (! $.jStorage) throw('appSettings requires jStorage')
+    if (! $.jStorage) throw('appSettings requires jStorage');
     if (! _options) throw('Supply an options hash');
     if (! _options._id) throw('Supply an _id key in options');
     
@@ -109,11 +118,14 @@ var _app_Settings = function(_options){
             // Save it.
             $.jStorage.set(App._id, App.d);
         };
+        
     }
 
     App.get = function(key){
         var item = App.d[key];
-        var type = typeof(item);
+        if (! item){
+            throw('Cannot get selected value for '+key);
+        }
         return item.selected;
     };
     
@@ -138,7 +150,7 @@ var _app_Settings = function(_options){
         if ($.inArray(value, App.d[key].selected) == -1) throw(value + ' not currently selected for this Choose Many');
         App.d[key].selected.remove(App.d[key].selected.indexOf(value));
         $.jStorage.set(App._id, App.d);
-    }
+    };
 
     App.reset = function(){
         $.jStorage.deleteKey(App._id);
@@ -257,30 +269,64 @@ var _app_Settings = function(_options){
             // Choose One
             // ----------
             } else if (type=='choose_one'){
-                
-                $.each(item.selections, function(n, this_key){
+
+                // Use a Select element?
+                if (item.form_element === 'select'){
+
                     var input_wrapper = $('<div />')
                         .addClass(input_wrapper_class);
-                    
-                    var input = $('<input />')
-                        .attr('type', 'radio')
-                        .attr('selection_type', 'choose_one')
-                        .attr('class', input_class)
-                        .attr('id', selector_prefix + this_key)
-                        .attr('name', key)
-                        .attr('value', this_key)
-                        .prop('checked', App.get(key)==this_key)
-                        .appendTo(input_wrapper);
-    
+
                     var label = $('<label />')
-                        .attr('for', selector_prefix + this_key)
-                        .html(this_key.split('_').join(' ').capitalize())
+                        .attr('for', selector_prefix + key)
+                        .html(key.split('_').join(' ').capitalize())
                         .appendTo(input_wrapper);
+
+                    var select = $('<select />')
+                        .attr('class', input_class)
+                        .attr('selection_type', 'choose_one')
+                        .attr('name', key)
+                        .attr('id', key)
+                        .appendTo(input_wrapper);
+                    
+                    $.each(item.selections, function(n, this_key){
+                        $('<option>')
+                            .attr('value', this_key)
+                            .html(this_key)
+                            .attr('selected', App.get(key)==this_key)
+                            .appendTo(select);
+                    });
                 
                     input_wrapper.appendTo(wrapper);
 
-                });
+                }                
+
+
+                // Default to Radio Buttons for Choose One
+                else {
+                    $.each(item.selections, function(n, this_key){
+                        var input_wrapper = $('<div />')
+                            .addClass(input_wrapper_class);
+                        
+                        var input = $('<input />')
+                            .attr('type', 'radio')
+                            .attr('selection_type', 'choose_one')
+                            .attr('class', input_class)
+                            .attr('id', selector_prefix + this_key)
+                            .attr('name', key)
+                            .attr('value', this_key)
+                            .prop('checked', App.get(key)==this_key)
+                            .appendTo(input_wrapper);
         
+                        var label = $('<label />')
+                            .attr('for', selector_prefix + this_key)
+                            .html(this_key.split('_').join(' ').capitalize())
+                            .appendTo(input_wrapper);
+                    
+                        input_wrapper.appendTo(wrapper);
+        
+                    });
+                }
+                
             }
 
             // Checkbox
@@ -316,10 +362,13 @@ var _app_Settings = function(_options){
         };
 
         form.find('.'+input_class).change(function(e){
+            
             var input = $(this);
             var selection_type = input.attr('selection_type');
             var name = input.attr('name');
             var value = input.attr('value');
+
+            console.log(input, selection_type, name, value);
 
             // toggle            
             if (selection_type == 'toggle') {
@@ -344,6 +393,7 @@ var _app_Settings = function(_options){
                 }
             }
         });
+        
 
         if (App.user_config.options.mobile){
             
@@ -376,6 +426,9 @@ var _app_Settings = function(_options){
 $.appSettings = {};
 $.appSettings.initialize = function(options){
     $.appSettings._app_settings = new _app_Settings(options);
+    if (typeof options.options.onReady === 'function'){
+        options.options.onReady();
+    }
 }
 $.appSettings.get = function(key){
     return $.appSettings._app_settings.get(key);
