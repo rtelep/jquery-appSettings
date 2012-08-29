@@ -367,8 +367,6 @@ var _app_Settings = function(_options){
             var name = input.attr('name');
             var value = input.attr('value');
 
-            console.log(input, selection_type, name, value);
-
             // toggle            
             if (selection_type == 'toggle') {
                 // the toggle is a checkbox
